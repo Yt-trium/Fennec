@@ -27,8 +27,24 @@ def addOffer(url):
     url = 'https:' + url;
     r = requests.get(url)
     print("[ ADD ]", r, url);
-    sqlite.execute('INSERT INTO Offers (`idOffer`,`pseudo`,`name`,`description`,`price`,`address`,`addDate`,`phone`) VALUES (0,"a","b","c",0,"d","e",0)');
-    sqlite.commit();
+    soup = BeautifulSoup(r.text, 'html.parser')
+
+    # print(soup.find('h2', {'class':'item_price clearfix'})["content"]);
+
+    '''
+    idOffer     = soup.find('span',{'class':'flat-horizontal saveAd link-like'})['data-savead-id'];
+    pseudo      = soup.find('a', {'class':'uppercase bold trackable'}).string.strip();
+    name        = soup.find("meta",  property="og:title")["content"];
+    description = soup.find(itemprop="description").contents
+    price       =
+    address     =
+    addDate     =
+    phone       =
+    '''
+
+    #sqlite.execute('INSERT INTO Offers (`idOffer`,`pseudo`,`name`,`description`,`price`,`address`,`addDate`,`phone`) VALUES (0,"a","b","c",0,"d","e",0)');
+    #sqlite.commit();
+    #print("[ ADD ]", idOffer, psedo, name, description, price, address, addDate, phone);
     return;
 
 
